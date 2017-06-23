@@ -31,7 +31,7 @@ public class Consulta1Dao {
         ArrayList<String> genres_list = new ArrayList<String>();
         PreparedStatement stmt;
         ResultSet r; // will store the query's result
-        String SQL = "SELECT genres FROM genres";
+        String SQL = "SELECT genres FROM genres ORDER BY genres ASC";
         stmt = connection.prepareStatement(SQL);
         r = stmt.executeQuery();
 
@@ -47,7 +47,7 @@ public class Consulta1Dao {
         ArrayList<String> languages_list = new ArrayList<String>();
         PreparedStatement stmt;
         ResultSet r; // will store the query's result
-        String SQL = "SELECT languages FROM languages";
+        String SQL = "SELECT languages FROM languages ORDER BY languages ASC";
         stmt = connection.prepareStatement(SQL);
         r = stmt.executeQuery();
 

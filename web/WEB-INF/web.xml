@@ -8,6 +8,14 @@
         <servlet-name>GetLanguages</servlet-name>
         <servlet-class>Controller.GetLanguages</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddGenres</servlet-name>
+        <servlet-class>Controller.AddGenres</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddLanguages</servlet-name>
+        <servlet-class>Controller.AddLanguages</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetGenres</servlet-name>
         <url-pattern>/GetGenres</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>GetLanguages</servlet-name>
         <url-pattern>/GetLanguages</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddGenres</servlet-name>
+        <url-pattern>/AddGenres</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddLanguages</servlet-name>
+        <url-pattern>/AddLanguages</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
