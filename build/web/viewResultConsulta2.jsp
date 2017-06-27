@@ -44,11 +44,22 @@
       
       <table>
           <thead>
-            <th width="180">Movies Titles</th>
+            <th width="180">Genre</th>
+            <th width="180">Count</th>
           </thead>
         <%
           for(int i = 0 ; i < results.size(); i++) {
-            out.println("<tr>" + "<td>" + results.get(i)+ "</td>" 
+              
+            String string = results.get(i);
+            String[] parts = string.split(",");
+            String part1 = parts[0];
+            
+            part1 = part1.substring(1);
+            String part2 = parts[1];
+            part2 = part2.substring(0, part2.length() - 1);
+            
+            out.println("<tr>" + "<td>" + part1+ "</td>"
+                    +"<td>" + part2 + "</td>"
               + "<tr>");
           }
         %>

@@ -11,7 +11,6 @@
     <head>
         <title>Consulta 2</title>
         <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="js/getSelectsConsulta2.js"></script>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">       
     </head>
@@ -40,12 +39,10 @@
             <h3>Consulta 2</h3>
             
             <label class="mr-sm-2" for="actorSelect">Actor</label>
-            <select class="form-control" id="actorSelect" name="actorSelect">
-            </select>
-
+            <input type="text" class="form-control" id="actorSelect" name="actorSelect">
+            
             <label class="mr-sm-2" for="directorSelect">Director</label>
-            <select class="form-control" id="directorSelect" name="directorSelect">               
-            </select>
+            <input type="text" class="form-control" id="directorSelect" name="directorSelect">               
 
             <input type="submit" class="btn btn-primary"></button>
         </form>
