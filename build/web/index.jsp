@@ -21,7 +21,7 @@
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html">Home</a>
+                        <a class="navbar-brand" href="index.jsp">Home</a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,8 +52,8 @@
             </select>
 
             <button type="button" class="btn btn-secondary btn-sm" id="addLanguagesButtom">+</button>
-            <input type="number" style="display:none" id="count_genres">
-            <input type="number" style="display:none" id="count_languages">
+            <input type="number" style="display:none" id="count_genres" name="count_genres">
+            <input type="number" style="display:none" id="count_languages" name="count_languages">
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 

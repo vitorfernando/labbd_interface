@@ -6,12 +6,14 @@
 package Controller;
 
 import Model.ConsultasDao;
+import Model.Director;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.sql.JDBCType.ARRAY;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -77,25 +79,35 @@ public class Consulta1 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String title = request.getParameter("tle");
+        String aux = request.getParameter("count_genres");
         int count_genres = Integer.parseInt(request.getParameter("count_genres"));
         int count_languages = Integer.parseInt(request.getParameter("count_languages"));
+               
         
-        String array_genres[] = null;
-        String array_languages[] = null;
+            String array_genres[] = new String[count_genres];
+            for(int i = 0; i < count_genres; i++){
+                String x = "" + (i + 1);
+                array_genres[i] = request.getParameter("genresSelect"+x);
+            }
         
-        for(int i=0; i < count_genres; i++){
-            array_genres[i] = request.getParameter("genresSelect"+i);
-        }
+            String array_languages[] = new String[count_languages];
+            for(int i = 0; i < count_languages; i++){
+                String x = "" + (i + 1);
+                array_languages[i] = request.getParameter("languagesSelect"+x);
+            }
         
-        for(int i=0; i < count_genres; i++){
-            array_languages[i] = request.getParameter("languagesSelect"+i);
-        }
         
         try {
             ConsultasDao c1dao = new ConsultasDao();
+            ArrayList<Director> directors_list = c1dao.consulta1(title,array_genres,array_languages);
+            request.setAttribute("directors_list", directors_list);
             
-            
+            RequestDispatcher d = null;
+            d = request.getRequestDispatcher("/viewResultConsulta1.jsp");
+            d.forward(request, response);
         } catch (DAOException ex) {
+            Logger.getLogger(Consulta1.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(Consulta1.class.getName()).log(Level.SEVERE, null, ex);
         }
         

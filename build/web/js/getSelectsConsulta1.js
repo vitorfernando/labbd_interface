@@ -6,8 +6,9 @@
 $(document).ready(function () {
     var count_genres = 1;
     var count_languages = 1;
-
-
+    $('#count_genres').val("1");
+    $('#count_languages').val("1");
+    
     $.ajax({
         type: "POST", //Method
         url: "GetGenres", //Servlet
@@ -30,7 +31,9 @@ $(document).ready(function () {
 
     $('#addGenresButtom').click(function () {
         count_genres = count_genres + 1;
-        $('#count_genres').val(count_genres);
+        var x = $('#count_genres');
+        x.val(count_genres);
+        
         $.ajax({
             type: "POST", //Method
             url: "AddGenres", //Servlet
@@ -58,6 +61,9 @@ $(document).ready(function () {
 
     $('#addLanguagesButtom').click(function () {
         count_languages = count_languages + 1;
+        var y = $('#count_languages');
+        y.val(count_languages);
+        
         $.ajax({
             type: "POST", //Method
             url: "AddLanguages", //Servlet
@@ -65,8 +71,7 @@ $(document).ready(function () {
             data: {count_languages: count_languages},
             success: function (data, textStatus, jqXHR) { //Response data
                 $('#addLanguagesButtom').before(data);
-                var select_languages = '#languagesSelect' + count_languages;
-                $('#count_languages').val(count_languages);
+                var select_languages = '#languagesSelect' + count_languages;                
 
                 $.ajax({
                     type: "POST", //Method
@@ -77,7 +82,6 @@ $(document).ready(function () {
                         $(select_languages).html(data);
                     }
                 });
-
             }
         });
     });

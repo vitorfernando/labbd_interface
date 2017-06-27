@@ -1,19 +1,23 @@
 <%-- 
     Document   : viewResultConsulta1
-    Created on : 26/06/2017, 01:00:35
+    Created on : 27/06/2017, 02:39:24
     Author     : vitor
 --%>
 
+
+<%@page import="Model.Director"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <script src="js/jquery-3.2.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Consulta1 Result</title>
     </head>
-    <body><header>
+    <body>
+        <header>
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -24,7 +28,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active" id="consulta1buttom"><a href="#">Consulta1<span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="index.jsp">Consulta1<span class="sr-only">(current)</span></a></li>
                             <li class="active"><a href="consulta2.jsp">Consulta2<span class="sr-only">(current)</span></a></li>                           
                             <li class="active"><a href="teste.jsp">Testes<span class="sr-only">(current)</span></a></li>                           
                         </ul>
@@ -32,29 +36,32 @@
                 </div><!-- /.container-fluid -->
             </nav>
         </header>
-        <%
-        ArrayList<String> results = (ArrayList<String>)request.getAttribute("result_list");
-        if(results != null){
-        if(results.isEmpty()) {
+        <section>
+    <article>
+      <%
+        ArrayList<Director> directors = (ArrayList<Director>)request.getAttribute("directors_list");
+        if(directors.isEmpty()) {
       %>
-        <h3>No movies were find. Please review your search terms.</h3>
+        <p>No directors were find. Please review your search terms.</p>
       <%
         } else {
       %>
-      
-      <table>
+        <table width="100" class="table table-hover">
           <thead>
-            <th width="180">Movies Titles</th>
+            <th>ID</th>
+            <th>DirectorName</th>
           </thead>
         <%
-          for(int i = 0 ; i < results.size(); i++) {
-            out.println("<tr>" + "<td>" + results.get(i)+ "</td>" 
-              + "<tr>");
+          for(Director u : directors) {
+            out.println("<tr>" + "<td>" + u.getDirectorid()+ "</td>" + "<td>" 
+              + u.getDname()+ "</td>" + "<tr>");
           }
         %>
         </table>
       <% 
-        }}
+        }
       %>
+    </article>
+  </section>
     </body>
 </html>
