@@ -86,7 +86,9 @@ public class Teste extends HttpServlet {
             Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             String exception = ex.getMessage();
-            request.setAttribute("result", exception);
+            request.setAttribute("result", "<div class=\"alert alert-danger\" role=\"alert\">\n" +
+"  <span class=\"sr-only\">Erro:</span>\n" +
+"  "+ exception +"\n" + "</div> <input type=\"button\" value=\"Voltar\" onClick=\"history.go(-1)\"> ");
             
             RequestDispatcher d = null;
             d = request.getRequestDispatcher("/viewResultTeste.jsp");

@@ -16,7 +16,7 @@ $(document).ready(function () {
         }
 
     });
-
+    
 
     $.ajax({
         type: "POST", //Method
@@ -27,4 +27,5 @@ $(document).ready(function () {
             $('#actorSelect').html(data);
         }
     });
+    return false;
 });

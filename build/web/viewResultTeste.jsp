@@ -33,8 +33,7 @@
                 </div><!-- /.container-fluid -->
             </nav>
         </header>
-        <p>
-            <%out.println(request.getAttribute("result"));%>
-        </p>
+        <%out.println(request.getAttribute("result"));
+            %>
     </body>
 </html>
