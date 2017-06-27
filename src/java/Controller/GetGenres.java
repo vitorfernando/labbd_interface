@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Model.Consulta1Dao;
+import Model.ConsultasDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -78,7 +78,7 @@ public class GetGenres extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            Consulta1Dao cdao = new Consulta1Dao();
+            ConsultasDao cdao = new ConsultasDao();
             ArrayList<String> genres_list = cdao.getGenres();
             String genres_options = "";
 
@@ -94,7 +94,7 @@ public class GetGenres extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(GetGenres.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DAOException ex) {
-            Logger.getLogger(GetLanguages.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetGenres.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

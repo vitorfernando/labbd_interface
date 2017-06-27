@@ -9,9 +9,9 @@ import Model.ConsultasDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ import persistence.DAOException;
  *
  * @author vitor
  */
-public class GetLanguages extends HttpServlet {
+public class Teste extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class GetLanguages extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GetLanguages</title>");            
+            out.println("<title>Servlet Teste</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet GetLanguages at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Teste at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,24 +76,21 @@ public class GetLanguages extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            ConsultasDao cdao = new ConsultasDao();
-            ArrayList<String> languages_list = cdao.getLanguages();
-            String languages_options = "";
-            
-            for(int i = 0; i < languages_list.size(); i++){
-                languages_options+="<option value=\""+languages_list.get(i)+"\">"+languages_list.get(i)+"</option>";
-            }
-            response.setCharacterEncoding("UTF-8");
-            
-            PrintWriter writer = response.getWriter();
-            writer.print(languages_options);
-            writer.close();
+        String query = request.getParameter("query");
 
-        } catch (SQLException ex) {
-            Logger.getLogger(GetGenres.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            ConsultasDao dao = new ConsultasDao();
+            dao.teste(query);
+
         } catch (DAOException ex) {
-            Logger.getLogger(GetGenres.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            String exception = ex.getMessage();
+            request.setAttribute("result", exception);
+            
+            RequestDispatcher d = null;
+            d = request.getRequestDispatcher("/viewResultTeste.jsp");
+            d.forward(request, response);
         }
     }
 

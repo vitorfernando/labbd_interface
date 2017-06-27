@@ -1,19 +1,17 @@
 <%-- 
-    Document   : index
-    Created on : 21/06/2017, 04:18:29
+    Document   : viewResultTeste
+    Created on : 26/06/2017, 22:50:04
     Author     : vitor
 --%>
 
-<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Consulta 1</title>
         <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="js/getSelectsConsulta1.js"></script>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <title>JSP Page</title>
     </head>
     <body>
         <header>
@@ -35,29 +33,8 @@
                 </div><!-- /.container-fluid -->
             </nav>
         </header>
-        <form class="form-inline" id="consulta1" method="POST" action="Consulta1">
-            <h3>Consulta 1</h3>
-
-            <label for="tle">Title:</label>
-            <input type="text" class="form-control" id="tle" name="tle">
-
-            <label class="mr-sm-2" for="genresSelect1">Gênero</label>
-            <select class="form-control" id="genresSelect1" name="genresSelect1">
-            </select>
-
-            <button type="button" class="btn btn-secondary btn-sm" id="addGenresButtom">+</button>
-
-            <label class="mr-sm-2" for="languagesSelect1">Languages</label>
-            <select class="form-control" id="languagesSelect1" name="languagesSelect1">               
-            </select>
-
-            <button type="button" class="btn btn-secondary btn-sm" id="addLanguagesButtom">+</button>
-            <input type="number" style="display:none" id="count_genres">
-            <input type="number" style="display:none" id="count_languages">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
-
+        <p>
+            <%out.println(request.getAttribute("result"));%>
+        </p>
     </body>
 </html>
-

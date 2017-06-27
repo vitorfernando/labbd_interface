@@ -16,6 +16,26 @@
         <servlet-name>AddLanguages</servlet-name>
         <servlet-class>Controller.AddLanguages</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Consulta1</servlet-name>
+        <servlet-class>Controller.Consulta1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Consulta2</servlet-name>
+        <servlet-class>Controller.Consulta2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetActors</servlet-name>
+        <servlet-class>Controller.GetActors</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetDirectors</servlet-name>
+        <servlet-class>Controller.GetDirectors</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Teste</servlet-name>
+        <servlet-class>Controller.Teste</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetGenres</servlet-name>
         <url-pattern>/GetGenres</url-pattern>
@@ -32,9 +52,29 @@
         <servlet-name>AddLanguages</servlet-name>
         <url-pattern>/AddLanguages</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Consulta1</servlet-name>
+        <url-pattern>/Consulta1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Consulta2</servlet-name>
+        <url-pattern>/Consulta2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetActors</servlet-name>
+        <url-pattern>/GetActors</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetDirectors</servlet-name>
+        <url-pattern>/GetDirectors</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Teste</servlet-name>
+        <url-pattern>/Teste</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            90
         </session-timeout>
     </session-config>
 </web-app>

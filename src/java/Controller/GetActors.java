@@ -22,7 +22,7 @@ import persistence.DAOException;
  *
  * @author vitor
  */
-public class GetLanguages extends HttpServlet {
+public class GetActors extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class GetLanguages extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GetLanguages</title>");            
+            out.println("<title>Servlet GetActors</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet GetLanguages at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet GetActors at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +62,25 @@ public class GetLanguages extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            ConsultasDao adao = new ConsultasDao();
+            ArrayList<String> actors_list = adao.getActors();           
+            String actors_options ="";
+            
+            for (int i = 0 ; i < actors_list.size(); i++){
+                actors_options += "<option value=\"" + actors_list.get(i) + "\">" + actors_list.get(i) + "</option>";
+            }
+            response.setCharacterEncoding("UTF-8");
+
+            PrintWriter writer = response.getWriter();
+            writer.print(actors_options);
+            writer.close();
+            
+        } catch (DAOException ex) {
+            Logger.getLogger(GetActors.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GetActors.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -77,23 +95,23 @@ public class GetLanguages extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            ConsultasDao cdao = new ConsultasDao();
-            ArrayList<String> languages_list = cdao.getLanguages();
-            String languages_options = "";
+            ConsultasDao adao = new ConsultasDao();
+            ArrayList<String> actors_list = adao.getActors();           
+            String actors_options ="";
             
-            for(int i = 0; i < languages_list.size(); i++){
-                languages_options+="<option value=\""+languages_list.get(i)+"\">"+languages_list.get(i)+"</option>";
+            for (int i = 0 ; i < actors_list.size(); i++){
+                actors_options += "<option value=\"" + actors_list.get(i) + "\">" + actors_list.get(i) + "</option>";
             }
             response.setCharacterEncoding("UTF-8");
-            
-            PrintWriter writer = response.getWriter();
-            writer.print(languages_options);
-            writer.close();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(GetGenres.class.getName()).log(Level.SEVERE, null, ex);
+            PrintWriter writer = response.getWriter();
+            writer.print(actors_options);
+            writer.close();
+            
         } catch (DAOException ex) {
-            Logger.getLogger(GetGenres.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetActors.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GetActors.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

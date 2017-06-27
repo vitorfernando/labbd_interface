@@ -8,98 +8,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
-        <title>Imdb</title>
-        <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <title>Consulta 1</title>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/getSelectsConsulta1.js"></script>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script>
-            $(document).ready(function () {
-                var count_genres = 1;
-                var count_languages = 1;
-                
-                $.ajax({
-                    type: "POST", //Method
-                    url: "GetGenres", //Servlet
-                    dataType: "html", //Response Typ
-                    data: {tle: $('#tle').val()},
-                    success: function (data, textStatus, jqXHR) { //Response data
-                        $('#genresSelect1').html(data);
-                    }
-                });
-
-                $.ajax({
-                    type: "POST", //Method
-                    url: "GetLanguages", //Servlet
-                    dataType: "html", //Response Type
-                    data: {tle: $('#tle').val()},
-                    success: function (data, textStatus, jqXHR) { //Response data
-                        $('#languagesSelect1').html(data);
-                    }
-                });
-
-                $('#addGenresButtom').click(function () {
-                    count_genres = count_genres + 1;
-                    $.ajax({
-                        type: "POST", //Method
-                        url: "AddGenres", //Servlet
-                        dataType: "html", //Response Type
-                        data: {count_genres: count_genres},
-                        success: function (data, textStatus, jqXHR) { //Response data
-                            $('#addGenresButtom').before(data);
-                            var select = '#genresSelect' + count_genres;
-
-                            $.ajax({
-                                type: "POST", //Method
-                                url: "GetGenres", //Servlet
-                                dataType: "html", //Response Typ
-                                data: {tle: $('#tle').val()},
-                                success: function (data, textStatus, jqXHR) { //Response data
-                                    $(select).html(data);
-                                }
-                            });
-
-                        }
-                    });
-                });
-                
-                
-                
-                $('#addLanguagesButtom').click(function () {
-                    count_languages = count_languages + 1;
-                    $.ajax({
-                        type: "POST", //Method
-                        url: "AddLanguages", //Servlet
-                        dataType: "html", //Response Type
-                        data: {count_languages: count_languages},
-                        success: function (data, textStatus, jqXHR) { //Response data
-                            $('#addLanguagesButtom').before(data);
-                            var select_languages = '#languagesSelect' + count_languages;
-
-                            $.ajax({
-                                type: "POST", //Method
-                                url: "GetLanguages", //Servlet
-                                dataType: "html", //Response Typ
-                                data: {tle: $('#tle').val()},
-                                success: function (data, textStatus, jqXHR) { //Response data
-                                    $(select_languages).html(data);
-                                }
-                            });
-
-                        }
-                    });
-                });
-                
-                
-
-                $('#consulta1buttom').click(function () {
-                    alert("oi");
-                });
-
-                $('#consulta2buttom').click(function () {
-                    alert("oi");
-                });
-            });
-        </script>
+        
     </head>
     <body>
         <header>
@@ -113,15 +27,17 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active" id="consulta1buttom"><a href="#">Consulta1<span class="sr-only">(current)</span></a></li>
-                            <li class="active"><a href="#">Consulta2<span class="sr-only">(current)</span></a></li>                           
+                            <li class="active"><a href="index.jsp">Consulta1<span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="consulta2.jsp">Consulta2<span class="sr-only">(current)</span></a></li>                           
+                            <li class="active"><a href="teste.jsp">Testes<span class="sr-only">(current)</span></a></li>                           
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
         </header>
-        <div class="form-inline" id="consulta1">
+        <form class="form-inline" id="consulta1" method="POST" action="Consulta1">
             <h3>Consulta 1</h3>
+
             <label for="tle">Title:</label>
             <input type="text" class="form-control" id="tle" name="tle">
 
@@ -132,28 +48,16 @@
             <button type="button" class="btn btn-secondary btn-sm" id="addGenresButtom">+</button>
 
             <label class="mr-sm-2" for="languagesSelect1">Languages</label>
-            <select class="form-control" id="languagesSelect1">               
+            <select class="form-control" id="languagesSelect1" name="languagesSelect1">               
             </select>
+
             <button type="button" class="btn btn-secondary btn-sm" id="addLanguagesButtom">+</button>
-
+            <input type="number" style="display:none" id="count_genres">
+            <input type="number" style="display:none" id="count_languages">
             <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        </form>
 
-        <div class="form-inline" id="consulta1">
-            <h3>Consulta 2</h3>
-            <label for="tle">Title:</label>
-            <input type="text" class="form-control" id="tle" name="tle">
-            <label class="mr-sm-2" for="genresSelect">Gênero</label>
 
-            <select class="form-control" id="genresSelect" name="genresSelect">
-            </select>
-
-            <label class="mr-sm-2" for="languagesSelect">Languages</label>
-            <select class="form-control" id="languagesSelect">               
-            </select>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
     </body>
 </html>
 

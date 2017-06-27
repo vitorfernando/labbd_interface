@@ -8,7 +8,7 @@ package Controller;
 import Model.ConsultasDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
+import static java.sql.JDBCType.ARRAY;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +22,7 @@ import persistence.DAOException;
  *
  * @author vitor
  */
-public class GetLanguages extends HttpServlet {
+public class Consulta1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class GetLanguages extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GetLanguages</title>");            
+            out.println("<title>Servlet Consulta1</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet GetLanguages at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Consulta1 at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,26 +76,32 @@ public class GetLanguages extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            ConsultasDao cdao = new ConsultasDao();
-            ArrayList<String> languages_list = cdao.getLanguages();
-            String languages_options = "";
-            
-            for(int i = 0; i < languages_list.size(); i++){
-                languages_options+="<option value=\""+languages_list.get(i)+"\">"+languages_list.get(i)+"</option>";
-            }
-            response.setCharacterEncoding("UTF-8");
-            
-            PrintWriter writer = response.getWriter();
-            writer.print(languages_options);
-            writer.close();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(GetGenres.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DAOException ex) {
-            Logger.getLogger(GetGenres.class.getName()).log(Level.SEVERE, null, ex);
+        String title = request.getParameter("tle");
+        int count_genres = Integer.parseInt(request.getParameter("count_genres"));
+        int count_languages = Integer.parseInt(request.getParameter("count_languages"));
+        
+        String array_genres[] = null;
+        String array_languages[] = null;
+        
+        for(int i=0; i < count_genres; i++){
+            array_genres[i] = request.getParameter("genresSelect"+i);
         }
+        
+        for(int i=0; i < count_genres; i++){
+            array_languages[i] = request.getParameter("languagesSelect"+i);
+        }
+        
+        try {
+            ConsultasDao c1dao = new ConsultasDao();
+            
+            
+        } catch (DAOException ex) {
+            Logger.getLogger(Consulta1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
+    
+    
 
     /**
      * Returns a short description of the servlet.

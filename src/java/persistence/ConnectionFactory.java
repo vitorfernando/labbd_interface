@@ -10,8 +10,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -23,7 +21,7 @@ public class ConnectionFactory {
         try {
             Class.forName("org.postgresql.Driver");
             String connection = "jdbc:postgresql://localhost/labbd_imdb";
-            String user = "postgres", password = "12345";
+            String user = "user_app", password = "12345";
             Connection conn = DriverManager.getConnection(connection, user, password);
             return conn;
         } catch (SQLException e) {
