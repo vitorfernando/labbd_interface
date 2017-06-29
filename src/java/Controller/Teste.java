@@ -77,11 +77,11 @@ public class Teste extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String query = request.getParameter("query");
-
+        
         try {
             ConsultasDao dao = new ConsultasDao();
-            dao.teste(query);
-
+            String result = dao.teste(query,request.getParameter("query_test"));
+            
         } catch (DAOException ex) {
             Logger.getLogger(Teste.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

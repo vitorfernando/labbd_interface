@@ -26,16 +26,18 @@ public class ConsultasDao {
         this.connection = ConnectionFactory.getConnection();
     }
 
-    public void teste(String query) throws SQLException, DAOException {
+    public String teste(String query, String query_test) throws SQLException, DAOException {
         PreparedStatement stmt;
         ResultSet r; // will store the query's result
-
+        String result = "";
         stmt = connection.prepareStatement(query);
         r = stmt.executeQuery();
-
+        r.next();
+        result = r.getString(query_test);
         r.close();
         stmt.close();
         ConnectionFactory.closeConnection(connection);
+        return result;
     }
 
     public ArrayList<String> getActors() throws SQLException, DAOException {
@@ -106,11 +108,34 @@ public class ConsultasDao {
         return languages_list;
     }
 
+    public int consulta2aux(String actor, String director) throws SQLException, DAOException {
+        int result;
+        PreparedStatement stmt;
+        ResultSet r; // will store the query's result
+        String SQL = "SELECT count(am.movieid) FROM (SELECT movieid,act.actorid from act \n" +
+"		INNER JOIN (SELECT actorid from actor where actorname LIKE '"+ actor+"' ) AS a \n" +
+"		ON a.actorid = act.actorid) AS am ,\n" +
+"		 (SELECT movieid,d.directorid from direct \n" +
+"			INNER JOIN (SELECT directorid FROM  directors WHERE dname = '"+ director+"') AS d \n" +
+"			ON d.directorid = direct.directorid) AS dm \n" +
+"		Where dm.movieid = am.movieid";
+        stmt = connection.prepareStatement(SQL);
+        r = stmt.executeQuery();
+
+        r.next();
+        result = r.getInt("count");
+        
+        r.close();
+        stmt.close();
+        ConnectionFactory.closeConnection(connection);
+        return result;
+    }
+
     public ArrayList<String> consulta2(String actor, String director) throws SQLException, DAOException {
         ArrayList<String> movies_list = new ArrayList<String>();
         PreparedStatement stmt;
         ResultSet r; // will store the query's result
-        String SQL = "SELECT consulta2('" + actor + "','" + director + "')";
+        String SQL = "SELECT consulta2('actorname','dname','" + actor + "','" + director + "')";
         stmt = connection.prepareStatement(SQL);
         r = stmt.executeQuery();
 
@@ -127,7 +152,7 @@ public class ConsultasDao {
         ArrayList<Director> directors_list = new ArrayList<Director>();
         PreparedStatement stmt;
         ResultSet r; // will store the query's result
-        
+
         String SQL = "SELECT directors.directorid, directors.dname FROM directors,\n"
                 + "	(SELECT directorid FROM direct,\n"
                 + "		(SELECT m.movieid FROM \n"
@@ -136,7 +161,7 @@ public class ConsultasDao {
             for (int i = 0; i < array_genres.length - 1; i++) {
                 SQL += "'" + array_genres[i] + "' or genres = '";
             }
-            SQL += "" + array_genres[array_genres.length-1] + "') AS g ,";
+            SQL += "" + array_genres[array_genres.length - 1] + "') AS g ,";
         } else {
             SQL += "'" + array_genres[0] + "')AS g ,";
         }
@@ -146,7 +171,7 @@ public class ConsultasDao {
             for (int i = 0; i < array_languages.length - 1; i++) {
                 SQL += "'" + array_languages[i] + "' or languages = '";
             }
-            SQL += "" + array_languages[array_languages.length-1] + "') AS l ,";
+            SQL += "" + array_languages[array_languages.length - 1] + "') AS l ,";
         } else {
             SQL += "'" + array_languages[0] + "')AS l ,";
         }
@@ -154,7 +179,7 @@ public class ConsultasDao {
                 + "		WHERE m.movieid = g.movieid AND m.movieid = l.movieid) AS aux\n"
                 + "	WHERE aux.movieid = direct.movieid) AS aux2 \n"
                 + "WHERE aux2.directorid = directors.directorid;";
-        
+
         stmt = connection.prepareStatement(SQL);
         r = stmt.executeQuery();
 
@@ -168,6 +193,6 @@ public class ConsultasDao {
         stmt.close();
         ConnectionFactory.closeConnection(connection);
         return directors_list;
-        
+
     }
 }

@@ -34,6 +34,8 @@
         </header>
         <%
         ArrayList<String> results = (ArrayList<String>)request.getAttribute("result_list");
+        int total = (int)request.getAttribute("total");
+        
         if(results != null){
         if(results.isEmpty()) {
       %>
@@ -42,10 +44,10 @@
         } else {
       %>
       
-      <table>
+      <table class="table table-hover">
           <thead>
-            <th width="180">Genre</th>
-            <th width="180">Count</th>
+            <th>Genre</th>
+            <th>Count</th>
           </thead>
         <%
           for(int i = 0 ; i < results.size(); i++) {
@@ -62,6 +64,10 @@
                     +"<td>" + part2 + "</td>"
               + "<tr>");
           }
+          if(total - results.size() > 0){
+          out.println("<tr>" + "<td>Sem Gênero</td>"
+                    +"<td> " + (total - results.size()) + "</td>"
+              + "<tr>");}
         %>
         </table>
       <% 

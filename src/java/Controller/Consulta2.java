@@ -82,7 +82,10 @@ public class Consulta2 extends HttpServlet {
 
         try {
             ConsultasDao dao = new ConsultasDao();
-            ArrayList<String> result_list = dao.consulta2(actor, director);
+            int total = dao.consulta2aux(actor, director);
+            request.setAttribute("total", total);
+            ConsultasDao dao2 = new ConsultasDao();
+            ArrayList<String> result_list = dao2.consulta2(actor, director);
             request.setAttribute("result_list", result_list);
             RequestDispatcher d = null;
             d = request.getRequestDispatcher("/viewResultConsulta2.jsp");
